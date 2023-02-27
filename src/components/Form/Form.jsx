@@ -41,7 +41,7 @@ const Form = () => {
         setNameChanged('');
         setChecked(checked === false);
         setSelectOption('Manufacturing')
-        fetch('http://localhost:5000/sectorcollection', {
+        fetch('https://trask-server-production.up.railway.app/sectorcollection', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
@@ -55,49 +55,22 @@ const Form = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/sectorcollection')
+        fetch('https://trask-server-production.up.railway.app/sectorcollection')
             .then(res => res.json())
             .then(data => setDetails(data))
     }, [sectors])
 
     useEffect(() => {
-        fetch('http://localhost:5000/sectorcollection')
+        fetch('https://trask-server-production.up.railway.app/sectorcollection')
             .then(res => res.json())
             .then(data => setSevtors(data))
     }, [sectors, checked,updateCheck])
 
-    const handleEdit = (id,e) => {
-        console.log(updateCheck);
-        //e.preventDefault();
-        setUpdateCheck(true);
-        console.log(updateCheck);
-        setChecked(checked === true);
-        //setEdit(a);
-        fetch(`http://localhost:5000/sectorcollection/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                const a = sectors.find(sector => sector._id == id);
-                console.log(a.option);
-                setEdit(a);
-            })
-        fetch(`http://localhost:5000/sectorcollection/${id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(edit)
-        })
-            .then(res => res.json())
-        .then(data=>console.log(data))
-        
-        
-    }
     const handleDelete = (id) => {
         console.log(id);
         const proceed = window.confirm('Are you want to delete?');
         if (proceed) {
-            const uri = `http://localhost:5000/sectorcollection/${id}`;
+            const uri = `https://trask-server-production.up.railway.app/${id}`;
             fetch(uri, {
                 method: "DELETE"
             })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Update = () => {
     //const store  = useLoaderData();
@@ -9,13 +9,13 @@ const Update = () => {
     const [selectOption, setSelectOption] = useState('Manufacturing');
     //const [sectors, setSevtors] = useState({});
     const [edit, setEdit] = useState({});
-
+    const navigate = useNavigate();
 //console.log(edit);
     const { id } = useParams();
     //console.log(id);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/sectorcollection/${id}`)
+        fetch(`https://trask-server-production.up.railway.app/sectorcollection/${id}`)
             .then(res => res.json())
         .then(data=>{
             setEdit(data)
@@ -50,7 +50,7 @@ const Update = () => {
         //nameChanged = '';
         //setSevtors({});
         console.log(edit.name);
-        fetch(`http://localhost:5000/sectorcollection/${id}`, {
+        fetch(`https://trask-server-production.up.railway.app/sectorcollection/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type':'application/json'
@@ -62,6 +62,7 @@ const Update = () => {
                 if (data.modifiedCount > 0) {
                     alert("Sector updated")
                     console.log(data);
+                    navigate('/');
                 }
             })
     }
