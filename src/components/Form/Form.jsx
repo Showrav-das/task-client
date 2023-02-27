@@ -70,7 +70,7 @@ const Form = () => {
         console.log(id);
         const proceed = window.confirm('Are you want to delete?');
         if (proceed) {
-            const uri = `https://trask-server-production.up.railway.app/${id}`;
+            const uri = `https://trask-server-production.up.railway.app/sectorcollection/${id}`;
             fetch(uri, {
                 method: "DELETE"
             })
